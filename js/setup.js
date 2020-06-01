@@ -39,8 +39,13 @@ var openPopup = function() {
   userDialog.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
-
+var setupStartPosition = {
+  top: userDialog.style.top,
+  left: userDialog.style.left
+};
 var closePopup = function() {
+  userDialog.style.top = setupStartPosition.top;
+  userDialog.style.left = setupStartPosition.left;
   userDialog.classList.add('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
@@ -61,6 +66,7 @@ setupClose.addEventListener('keydown', function(evt) {
   if(evt.keyCode=== ENTER_KEYCODE) {
     closePopup();
   }
+
 });
 
 userNameInput.addEventListener('invalid', function (evt) {
@@ -123,3 +129,54 @@ for (var i = 0; i < wizards.length; i++) {
 }
 similarListElement.appendChild(fragment);   //вставляет элемент на страницу
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+
+
+(function () {
+
+var setupDialogElement = document.querySelector('.setup');
+var dialogHandler = setupDialogElement.querySelector('.upload');
+dialogHandler.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+  var dragged = false;
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+     dragged = true;
+
+  var shift = {
+    x: startCoords.x - moveEvt.clientX,
+    y: startCoords.y - moveEvt.clientY
+  };
+   startCoords = {
+    x: moveEvt.clientX,
+    y: moveEvt.clientY
+  };
+
+  setupDialogElement.style.top = (setupDialogElement.offsetTop - shift.y) + 'px';
+  setupDialogElement.style.left = (setupDialogElement.offsetLeft - shift.x) + 'px';
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+
+  if (dragged) {
+    var onClickPreventDefault = function (evt) {
+      evt.preventDefault();
+      dialogHandler.removeEventListener('click', onClickPreventDefault)
+    };
+    dialogHandler.addEventListener('click', onClickPreventDefault);
+  }
+  };
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+});
+})();
