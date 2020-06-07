@@ -25,17 +25,13 @@
     }
   };
   var openPopup = function(evt) {
-
     userDialog.classList.remove('hidden');
     coatChange.addEventListener('click', window.setup.onWizardCoatClick);
     eyesChange.addEventListener('click', window.setup.onWizardEyesClick);
     fireballChange.addEventListener('click', window.setup.onFireballClick);
-
-
     document.addEventListener('keydown', onPopupEscPress);
   };
   var closePopup = function(evt) {
-
     userDialog.classList.add('hidden');
     userDialog.style.top = setupStartPosition.top;
     userDialog.style.left = setupStartPosition.left;
