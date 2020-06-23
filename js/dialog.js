@@ -9,6 +9,7 @@
   var fireballChange = setupWizardForm.querySelector('.setup-fireball-wrap');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = document.querySelector('.setup-close');
+  var shopElement = document.querySelector('.setup-artifacts-shop');
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
   
@@ -30,12 +31,14 @@
     eyesChange.addEventListener('click', window.setup.onWizardEyesClick);
     fireballChange.addEventListener('click', window.setup.onFireballClick);
     document.addEventListener('keydown', onPopupEscPress);
+    shopElement.addEventListener('dragstart', window.setup.onShopElementDragstart);
   };
   var closePopup = function(evt) {
     userDialog.classList.add('hidden');
     userDialog.style.top = setupStartPosition.top;
     userDialog.style.left = setupStartPosition.left;
     document.addEventListener('keydown', onPopupEscPress);
+    shopElement.removeEventListener('dragstart', window.setup.onShopElementDragstart);
   };
   setupOpen.addEventListener('click', function() {
     openPopup();
