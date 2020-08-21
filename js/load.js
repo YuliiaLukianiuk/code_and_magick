@@ -3,6 +3,8 @@
   var URL = 'https://javascript.pages.academy/code-and-magick/data';
 
   window.load = function (onSuccess, onError) {
+
+    // url = url || URL;
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
