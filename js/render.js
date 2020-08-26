@@ -1,4 +1,33 @@
-// 'use strict';
+'use strict';
+(function () {
+  window.renderWizard = function (wizard) {
+  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+  
+  var element = similarWizardTemplate.cloneNode(true);
+  var wizardElement = element.querySelector('.wizard');
+      wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+      wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+
+      element.querySelector('.setup-similar-label').textContent = wizard.names + '\n ' + wizard.surnames;
+
+    return element;
+  };
+  //   // Module3-task1
+  var setupSimilarWizards = document.querySelector('.setup-similar');
+  var similarListElement = userDialog.querySelector('.setup-similar-list');
+
+  window.render = function (data) {
+    var takeNumber = data.length > 4 ? 4 : data.length;
+    similarList.innerHTML = '';
+    for (var i = 0; i < takeNumber; i++) {
+      similarListElement.appendChild(renderWizard(data[i]));
+    }
+
+    setupSimilarWizards.classList.remove('hidden');
+  };
+  
+})();
+
 
 // (function () {
 //   var WIZARD_COAT = [

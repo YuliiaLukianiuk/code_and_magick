@@ -2,9 +2,9 @@
 (function () {
   var URL = 'https://javascript.pages.academy/code-and-magick/data';
 
-  window.load = function (onSuccess, onError) {
+  window.load = function (url, onSuccess, onError) {
 
-    // url = url || URL;
+    url = url || URL;
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -22,7 +22,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'mc');
     });
     xhr.timeout = 1000;//10s
-    xhr.open('GET', URL);
+    xhr.open('GET', url);
     xhr.send();
   };
 })();
