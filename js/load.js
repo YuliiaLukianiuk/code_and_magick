@@ -1,9 +1,7 @@
-'use strict';
 (function () {
-  var URL = 'https://javascript.pages.academy/code-and-magick/data';
+  var URL = 'https://js.dump.academy/code-and-magick/data';
 
   window.load = function (url, onSuccess, onError) {
-
     url = url || URL;
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -12,16 +10,18 @@
       if (xhr.status === 200) {
         onSuccess(xhr.response);
       } else {
-        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+        onError('Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
     });
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'mc');
+      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
-    xhr.timeout = 1000;//10s
+
+    xhr.timeout = 10000; // 10s
+
     xhr.open('GET', url);
     xhr.send();
   };
