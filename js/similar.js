@@ -34,10 +34,10 @@
   };
   window.wizard.onEyesChange = function (color) {
     eyesColor = color;
-    updateFilter();
+    window.debounce(updateFilter);
     };
   window.wizard.onCoatChange = function (color) {
     coatColor = color;
-    updateFilter();
+    window.debounce(updateFilter);
   };
 })();
