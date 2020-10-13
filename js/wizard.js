@@ -55,6 +55,13 @@
     eyesColor = newColor;
     updateWizards();
   });
+  document.querySelector('.setup-wizard-form').addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var wizardCopy = document.querySelector('svg');
+    var dataUri = window.svg2base64(wizardCopy);
+    window.restartGame(dataUri, dataUri);
+  });
+
     // window.wizard = wizard;
     var getNextFireballColor = window.utils.getIterator(DATA_WIZARD.fireballColors);
     var changeFireballColor = userDialog.querySelector('.setup-fireball-wrap');
